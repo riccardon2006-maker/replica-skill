@@ -1,0 +1,22 @@
+{
+  "avoid": [
+    "Hevy",
+    "Hevy Coach",
+    "Hevy Trainer",
+    "Hevy Pro",
+    "HevyApp"
+  ],
+  "app_store": {
+    "name": "Barline: Workout Log",
+    "subtitle": "Unlimited routines and charts",
+    "promotional_text": "Log sets, rest between them, watch the line go up. Unlimited routines and custom exercises, all-time charts, no account needed.",
+    "description": "Barline is a fast gym log.\n\nStart a workout, add exercises, tick each set as you finish it. The rest timer starts on its own. Last session's numbers sit next to every set, so you always know what to beat.\n\nWhat you get, free:\n- Unlimited routines, with folders and supersets\n- Unlimited custom exercises\n- Warm-up, drop and failure sets, and RPE if you want it\n- Personal records spotted when you save\n- All-time charts for every exercise and your body weight\n- Works with no signal and no account\n- Export everything to CSV\n\nYour log stays on your phone unless you choose to sync it.",
+    "keywords": "gym,lifting,strength,training,tracker,sets,reps,rest timer,progressive overload,bodybuilding",
+    "whats_new": "First release."
+  },
+  "google_play": {
+    "title": "Barline: Workout Log",
+    "short_description": "Log sets, rest, see progress. Unlimited routines and all-time charts.",
+    "full_description": "Barline is a fast gym log.\n\nStart a workout, add exercises, tick each set as you finish it. The rest timer starts on its own. Last session's numbers sit next to every set.\n\nFree: unlimited routines and custom exercises, warm-up, drop and failure sets, personal records, all-time charts, body weight tracking, CSV export. Works with no signal and no account."
+  }
+}

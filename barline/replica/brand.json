@@ -1,0 +1,5 @@
+{
+  "avoid": ["Hevy", "Hevy Coach", "Hevy Trainer", "Hevy Pro", "HevyApp"],
+  "domains": ["hevyapp.com", "hevy.com", "hevycoach.com"],
+  "colors": []
+}

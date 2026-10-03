@@ -1,0 +1,72 @@
+import type { Equipment, Exercise, ExerciseKind } from './types';
+
+// Generic, descriptive exercise names. No media: demos are owned content.
+const rows: [string, Equipment, string, ExerciseKind?][] = [
+  ['Barbell Bench Press', 'barbell', 'chest'],
+  ['Incline Barbell Bench Press', 'barbell', 'chest'],
+  ['Dumbbell Bench Press', 'dumbbell', 'chest'],
+  ['Incline Dumbbell Press', 'dumbbell', 'chest'],
+  ['Dumbbell Fly', 'dumbbell', 'chest'],
+  ['Cable Crossover', 'cable', 'chest'],
+  ['Machine Chest Press', 'machine', 'chest'],
+  ['Push-up', 'bodyweight', 'chest', 'bodyweight_reps'],
+  ['Dip', 'bodyweight', 'triceps', 'bodyweight_reps'],
+  ['Barbell Back Squat', 'barbell', 'quads'],
+  ['Barbell Front Squat', 'barbell', 'quads'],
+  ['Leg Press', 'machine', 'quads'],
+  ['Leg Extension', 'machine', 'quads'],
+  ['Bulgarian Split Squat', 'dumbbell', 'quads'],
+  ['Goblet Squat', 'kettlebell', 'quads'],
+  ['Walking Lunge', 'dumbbell', 'quads'],
+  ['Barbell Deadlift', 'barbell', 'back'],
+  ['Romanian Deadlift', 'barbell', 'hamstrings'],
+  ['Lying Leg Curl', 'machine', 'hamstrings'],
+  ['Seated Leg Curl', 'machine', 'hamstrings'],
+  ['Barbell Hip Thrust', 'barbell', 'glutes'],
+  ['Standing Calf Raise', 'machine', 'calves'],
+  ['Seated Calf Raise', 'machine', 'calves'],
+  ['Pull-up', 'bodyweight', 'back', 'bodyweight_reps'],
+  ['Chin-up', 'bodyweight', 'back', 'bodyweight_reps'],
+  ['Lat Pulldown', 'cable', 'back'],
+  ['Seated Cable Row', 'cable', 'back'],
+  ['Barbell Row', 'barbell', 'back'],
+  ['One-arm Dumbbell Row', 'dumbbell', 'back'],
+  ['T-bar Row', 'machine', 'back'],
+  ['Face Pull', 'cable', 'shoulders'],
+  ['Overhead Press', 'barbell', 'shoulders'],
+  ['Seated Dumbbell Shoulder Press', 'dumbbell', 'shoulders'],
+  ['Dumbbell Lateral Raise', 'dumbbell', 'shoulders'],
+  ['Cable Lateral Raise', 'cable', 'shoulders'],
+  ['Rear Delt Fly', 'dumbbell', 'shoulders'],
+  ['Barbell Shrug', 'barbell', 'traps'],
+  ['Barbell Curl', 'barbell', 'biceps'],
+  ['Dumbbell Curl', 'dumbbell', 'biceps'],
+  ['Hammer Curl', 'dumbbell', 'biceps'],
+  ['Preacher Curl', 'machine', 'biceps'],
+  ['Cable Curl', 'cable', 'biceps'],
+  ['Triceps Pushdown', 'cable', 'triceps'],
+  ['Overhead Triceps Extension', 'cable', 'triceps'],
+  ['Skull Crusher', 'barbell', 'triceps'],
+  ['Close-grip Bench Press', 'barbell', 'triceps'],
+  ['Plank', 'bodyweight', 'abs', 'duration'],
+  ['Hanging Leg Raise', 'bodyweight', 'abs', 'bodyweight_reps'],
+  ['Cable Crunch', 'cable', 'abs'],
+  ['Ab Wheel Rollout', 'other', 'abs', 'bodyweight_reps'],
+  ['Kettlebell Swing', 'kettlebell', 'glutes'],
+  ['Farmer Carry', 'dumbbell', 'forearms', 'duration'],
+  ['Band Pull-apart', 'band', 'shoulders', 'bodyweight_reps'],
+];
+
+const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
+export const LIBRARY: Exercise[] = rows.map(([name, equipment, muscle, kind]) => ({
+  id: `lib-${slug(name)}`,
+  name,
+  equipment,
+  muscle,
+  kind: kind ?? 'weight_reps',
+  custom: false,
+}));
+
+export const MUSCLES = [...new Set(rows.map((r) => r[2]))].sort();
+export const EQUIPMENT: Equipment[] = ['barbell', 'dumbbell', 'machine', 'cable', 'bodyweight', 'kettlebell', 'band', 'other'];

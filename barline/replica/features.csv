@@ -1,0 +1,43 @@
+feature,area,priority,original,clone,notes
+Start an empty workout,logging,must,yes,yes,
+Add exercises from a searchable library,logging,must,yes,yes,
+Log weight and reps per set,logging,must,yes,yes,
+Tick a set as done,logging,must,yes,yes,
+Show previous values for each set,logging,must,yes,yes,tap to copy; ticking an empty set fills last time
+Rest timer starts on set done (+/- and skip),logging,must,yes,yes,
+Live workout duration volume and set counters,logging,must,yes,yes,
+Finish and save a workout with title,logging,must,yes,yes,
+Discard a workout in progress,logging,must,yes,yes,
+Workout in progress survives app reload,logging,must,yes,yes,written to storage on every change
+Log workouts with no connection,logging,must,yes,yes,local-first + service worker app shell
+Create edit and delete routines,routines,must,yes,yes,
+Start a workout from a routine,routines,must,yes,yes,
+Workout history list,history,must,yes,yes,
+Workout detail view,history,must,yes,yes,
+Exercise detail with history and best set,progress,must,yes,yes,
+kg / lb units,settings,must,yes,yes,
+Set types warm-up drop failure,logging,should,yes,yes,
+Per-exercise rest time in routine,routines,should,yes,yes,
+Offer to update the routine after a changed workout,routines,should,yes,yes,"help article ""Update Routine vs Keep Original Routine"""
+Exercise notes,logging,should,yes,yes,
+Supersets,logging,should,yes,yes,
+Personal records detected on save,progress,should,yes,yes,
+Estimated 1RM and progress chart per exercise,progress,should,yes,yes,
+Weekly volume / workouts chart on profile,progress,should,yes,yes,
+Create custom exercises,library,should,yes,yes,
+Edit and delete a past workout,history,should,yes,yes,
+Body weight measurements with chart,measurements,should,yes,partial,body weight only; other body measurements not built
+RPE per set,logging,could,yes,yes,
+Routine folders,routines,could,yes,yes,"free-text folder field, grouped on Train tab"
+Save a past workout as a routine,routines,could,yes,yes,
+Workout calendar,history,could,yes,yes,
+Export data as CSV,settings,could,yes,yes,
+Warm-up calculator,logging,could,yes,no,
+Social feed followers likes comments,social,could,yes,skip,the network and its users are what the app owns; needs a real backend and users
+Exercise demo videos and illustrations,library,could,yes,skip,owned media; clone ships names only
+Apple Watch and Wear OS apps,integrations,could,yes,skip,native only; not possible in a web build
+Apple Health / Google Fit sync,integrations,could,yes,skip,native only APIs
+Coaching marketplace and AI trainer programs,coaching,could,yes,skip,separate product and owned programming content
+No cap on routines or custom exercises in the free app,pricing,should,no,yes,fix from fixes.md
+All-time progress charts free,pricing,should,no,yes,fix from fixes.md
+Use with no account: data on the device,privacy,should,no,yes,fix from fixes.md
