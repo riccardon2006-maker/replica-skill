@@ -15,6 +15,7 @@ npm run dev          # http://localhost:5173  (try "Explore with sample data")
 npm test             # unit tests (vitest)
 npm run e2e          # Playwright, mobile + desktop, axe checks
 npm run build        # static site in dist/
+npm run build:artifact   # one self-contained HTML file for claude.ai (in-memory router, no service worker)
 npm run tokens       # regenerate src/styles/tokens.css from replica/design/tokens.json
 node scripts/screens.mjs   # screenshots into replica/clone-screens (dev server running)
 ```

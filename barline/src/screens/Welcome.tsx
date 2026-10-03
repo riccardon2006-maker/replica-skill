@@ -1,5 +1,6 @@
 // /welcome: the landing page. No fake proof: no testimonials, counts or ratings.
 import { Link } from 'react-router-dom';
+import liveShot from '../assets/live-workout.png';
 import { ChartLine, Infinity as Unlimited, Lock, Timer, WifiOff } from 'lucide-react';
 
 const FEATURES = [
@@ -27,7 +28,7 @@ export default function Welcome() {
         <Link className="btn primary lg" to="/workout">
           Start logging
         </Link>
-        <img src="/screens/live-workout.png" alt="The live workout screen: sets ticked off, rest timer counting down" style={{ width: '100%', borderRadius: 'var(--r-lg)', border: '1px solid var(--c-border)' }} />
+        <img src={liveShot} alt="The live workout screen: sets ticked off, rest timer counting down" style={{ width: '100%', borderRadius: 'var(--r-lg)', border: '1px solid var(--c-border)' }} />
       </section>
       <section className="stack">
         <h2 className="h-lg">The catch with most lifting logs</h2>

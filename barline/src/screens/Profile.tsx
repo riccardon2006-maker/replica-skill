@@ -227,12 +227,28 @@ export function Settings() {
   const db = useDb();
   const s = db.settings;
   const [confirm, setConfirm] = useState(false);
-  const exportCsv = () => {
+  const [exportNote, setExportNote] = useState('');
+  const exportCsv = async () => {
     const csv = workoutsToCsv(db.workouts, (id) => exerciseById(id, db)?.name ?? id);
+    const filename = `barline-workouts-${localDateKey(Date.now())}.csv`;
+    // Hosted on claude.ai: the page cannot download by itself, the viewer confirms a save.
+    if (import.meta.env.VITE_ARTIFACT) {
+      const host = (window as unknown as { claude?: { use(n: string): Promise<{ save(r: { filename: string; data: string }): Promise<unknown> } | null> } }).claude;
+      const downloads = await host?.use('downloads');
+      if (!downloads) return setExportNote('Export is not available in this view.');
+      try {
+        await downloads.save({ filename, data: csv });
+        setExportNote('');
+      } catch (e) {
+        const code = (e as { code?: string }).code;
+        setExportNote(code === 'declined' ? '' : 'Export did not go through. Try again in a moment.');
+      }
+      return;
+    }
     const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
     const a = document.createElement('a');
     a.href = url;
-    a.download = `barline-workouts-${localDateKey(Date.now())}.csv`;
+    a.download = filename;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -277,6 +293,11 @@ export function Settings() {
           <button className="btn secondary block" onClick={exportCsv} disabled={db.workouts.length === 0}>
             Export workouts (CSV)
           </button>
+          {exportNote && (
+            <p className="t-sm muted" role="status">
+              {exportNote}
+            </p>
+          )}
           <button className="btn danger block" onClick={() => setConfirm(true)}>
             Delete all data
           </button>
