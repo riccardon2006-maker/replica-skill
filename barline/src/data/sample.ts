@@ -60,8 +60,9 @@ export function loadSample(now = Date.now()) {
     const daysAgo = 42 - Math.floor(i / 3) * 7 - (i % 3) * 2;
     const start = new Date(now - daysAgo * day);
     start.setHours(18, 0, 0, 0);
-    const bump = Math.floor(i / 3) * 2.5;
-    const exercises: WorkoutExercise[] = p.lifts.map(([exerciseId, kg, reps, sets]) => ({
+    const week = Math.floor(i / 3);
+    // Each lift has its own pace (every week, every 2, 3, 4 weeks), so sessions beat a varying number of lifts.
+    const exercises: WorkoutExercise[] = p.lifts.map(([exerciseId, kg, reps, sets], j) => ({
       id: uid(),
       exerciseId,
       notes: '',
@@ -70,7 +71,7 @@ export function loadSample(now = Date.now()) {
       sets: Array.from({ length: sets }, () => ({
         id: uid(),
         type: 'normal' as const,
-        weightKg: kg + (kg >= 20 ? bump : bump / 5),
+        weightKg: kg + Math.floor(week / (j + 1)) * (kg >= 20 ? 2.5 : 0.5),
         reps,
         durationS: null,
         rpe: null,

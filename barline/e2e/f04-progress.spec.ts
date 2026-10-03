@@ -21,8 +21,16 @@ test.describe('F04 progress and records', () => {
     await page.getByRole('button', { name: 'Finish' }).click();
     await page.getByRole('button', { name: 'Save ticked sets' }).click();
     await page.getByRole('button', { name: 'Save workout' }).click();
-    await expect(page.getByText(/You set \d new personal record/)).toBeVisible();
+    await expect(page.getByText(/New personal best on 1 exercise/)).toBeVisible();
     await expect(page.getByRole('region', { name: 'Personal records' })).toContainText('Heaviest weight');
+  });
+
+  test('F04-E3 the PR badge counts exercises, not record kinds', async ({ page }) => {
+    await page.goto('/');
+    await page.getByRole('button', { name: 'Explore with sample data' }).click();
+    const badges = await page.locator('.badge').allTextContents();
+    expect(badges.length).toBeGreaterThan(0);
+    for (const b of badges) expect(Number(b.match(/\d+/)![0])).toBeLessThanOrEqual(4);
   });
 
   test('F04-E1 an exercise with no history says so', async ({ page }) => {

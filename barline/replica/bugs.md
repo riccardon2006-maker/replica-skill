@@ -29,8 +29,14 @@ Found by the e2e suite (first run: 48 passed, 22 failed across 2 viewports).
 - Screen: S05
 - Status: fixed (numbers only, unit in the column header, full text in the label).
 
-Final run: **72 passed, 0 failed** (mobile 390x844 + desktop 1440x900),
+Final run: **74 passed, 0 failed** (mobile 390x844 + desktop 1440x900),
 axe clean on every scanned screen, 13 unit tests passed.
+### BUG-005: every sample workout showed "12 PRs"
+- Severity: S4
+- Screens: S01, S07
+- Cause: the badge counted record kinds (heaviest, e1RM, volume) per exercise, and the sample data raised every lift every week.
+- Status: fixed (badge and detail count exercises; sample lifts progress at different paces). Test F04-E3.
+
 Open: S1 0, S2 0, S3 0, S4 0.
 
 ## To check (not reproduced)

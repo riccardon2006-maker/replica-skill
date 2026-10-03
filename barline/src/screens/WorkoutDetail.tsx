@@ -36,6 +36,11 @@ export default function WorkoutDetail() {
 
   const units = db.settings.units;
   const records = recordsIn(w, db.workouts);
+  // One line per exercise: four kinds of record on the same lift is one achievement, not four.
+  const byExercise = [...new Set(records.map((r) => r.exerciseId))].map((id) => {
+    const hits = records.filter((r) => r.exerciseId === id);
+    return { id, hits, top: hits.find((r) => r.kind === 'heaviest') ?? hits[0] };
+  });
   const editBlocked = !!db.active && db.active.editing?.workoutId !== w.id;
 
   return (
@@ -62,7 +67,11 @@ export default function WorkoutDetail() {
         {params.get('saved') && (
           <div className="card" role="status">
             <p className="h-lg">Saved. Nice work.</p>
-            {records.length > 0 ? <p className="muted">You set {records.length} new personal record{records.length > 1 ? 's' : ''}.</p> : <p className="muted">Every set counts. See you next time.</p>}
+            {byExercise.length > 0 ? (
+              <p className="muted">
+                New personal best on {byExercise.length} exercise{byExercise.length > 1 ? 's' : ''}.
+              </p>
+            ) : <p className="muted">Every set counts. See you next time.</p>}
           </div>
         )}
         <p className="muted">{fmtDate(w.startedAt)}</p>
@@ -76,13 +85,14 @@ export default function WorkoutDetail() {
           <section className="card" aria-label="Personal records">
             <h2 className="section-title">Personal records</h2>
             <ul className="stack" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-              {records.map((r, i) => (
-                <li key={i} className="row">
-                  <Trophy size={16} aria-hidden style={{ color: 'var(--c-warning)' }} />
+              {byExercise.map(({ id, hits, top }) => (
+                <li key={id} className="row" style={{ alignItems: 'flex-start' }}>
+                  <Trophy size={16} aria-hidden style={{ color: 'var(--c-warning)', marginTop: 4 }} />
                   <span className="grow">
-                    {exerciseById(r.exerciseId, db)?.name}: {KIND[r.kind]}
+                    <span style={{ display: 'block' }}>{exerciseById(id, db)?.name}</span>
+                    <span className="t-sm muted">{hits.map((r) => KIND[r.kind]).join(' · ')}</span>
                   </span>
-                  <span className="strong">{r.kind === 'reps' ? `${r.value} reps` : fmtWeight(r.value, units)}</span>
+                  <span className="strong">{top.kind === 'reps' ? `${top.value} reps` : fmtWeight(top.kind === 'e1rm' ? Math.round(top.value * 10) / 10 : top.value, units)}</span>
                 </li>
               ))}
             </ul>

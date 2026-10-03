@@ -11,7 +11,8 @@ export function fmtDate(ms: number) {
 
 export function WorkoutCard({ w }: { w: Workout }) {
   const db = useDb();
-  const prs = recordsIn(w, db.workouts).length;
+  // Counts exercises with a new best, not record kinds (one heavy squat is one PR, not three).
+  const prs = new Set(recordsIn(w, db.workouts).map((r) => r.exerciseId)).size;
   return (
     <Link className="card link" to={`/workouts/${w.id}`} aria-label={`${w.title}, ${fmtDate(w.startedAt)}`}>
       <div className="row between">
